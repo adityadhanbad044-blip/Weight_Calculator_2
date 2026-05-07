@@ -162,6 +162,34 @@
       transition:0.3s;
     }
 
+    /* FOOTER */
+
+    .footer{
+      margin-top:30px;
+      text-align:center;
+    }
+
+    .footer span{
+      display:inline-block;
+      background:black;
+      color:white;
+      padding:12px 25px;
+      border-radius:12px;
+      font-size:18px;
+      font-weight:bold;
+      letter-spacing:2px;
+
+      box-shadow:
+        0 0 10px rgba(0,0,0,0.4),
+        0 0 20px rgba(0,0,0,0.3);
+
+      transition:0.3s;
+    }
+
+    .footer span:hover{
+      transform:scale(1.05);
+    }
+
     /* MOBILE */
 
     @media(max-width:500px){
@@ -172,6 +200,11 @@
 
       .header h1{
         font-size:24px;
+      }
+
+      .footer span{
+        font-size:15px;
+        padding:10px 18px;
       }
     }
 
@@ -266,6 +299,12 @@
       class="result"
       id="resultBox"
     ></div>
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+      <span>DESIGN BY SHUBHAM</span>
+    </div>
 
   </div>
 
