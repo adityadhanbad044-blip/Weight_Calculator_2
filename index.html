@@ -3,168 +3,175 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Weight ↔ Price Calculator</title>
+  <title>Weight Price Calculator</title>
 
   <style>
+
+    :root{
+      --main-color:#c62828;
+      --dark-color:#9f1d1d;
+      --light-bg:#f2f2f2;
+    }
 
     *{
       margin:0;
       padding:0;
       box-sizing:border-box;
-      font-family: "Segoe UI", sans-serif;
+      font-family:Arial, sans-serif;
     }
 
     body{
-      background:#f3f3f3;
-      color:#222;
+      background:var(--light-bg);
     }
 
     /* HEADER */
 
     .header{
-      background:#c62828;
+      background:var(--main-color);
       color:white;
+      text-align:center;
       padding:20px;
-      border-bottom-left-radius:18px;
-      border-bottom-right-radius:18px;
+      border-bottom-left-radius:20px;
+      border-bottom-right-radius:20px;
       box-shadow:0 4px 10px rgba(0,0,0,0.2);
     }
 
     .header h1{
-      font-size:32px;
-      font-weight:700;
-      text-align:center;
+      font-size:30px;
+      letter-spacing:1px;
     }
 
     /* MAIN CARD */
 
     .container{
-      max-width:450px;
+      width:90%;
+      max-width:420px;
       margin:30px auto;
       background:white;
       padding:25px;
       border-radius:20px;
-      box-shadow:0 6px 18px rgba(0,0,0,0.12);
+      box-shadow:0 5px 15px rgba(0,0,0,0.1);
     }
 
-    /* RADIO BUTTONS */
+    /* OPTION BUTTONS */
 
-    .radio-group{
+    .mode-box{
       display:flex;
-      justify-content:space-between;
-      margin-bottom:30px;
-      gap:15px;
+      gap:10px;
+      margin-bottom:25px;
     }
 
-    .radio-box{
+    .mode-btn{
       flex:1;
-      background:#eeeeee;
-      padding:15px;
-      border-radius:14px;
-      text-align:center;
+      padding:14px;
+      border:none;
+      border-radius:12px;
+      background:#e0e0e0;
+      font-size:16px;
+      font-weight:bold;
       cursor:pointer;
-      border:2px solid transparent;
       transition:0.3s;
-      font-weight:600;
     }
 
-    .radio-box.active{
-      border-color:#c62828;
-      background:#ffe5e5;
-      color:#c62828;
+    .active{
+      background:var(--main-color);
+      color:white;
     }
 
     /* INPUTS */
 
     .input-group{
-      margin-bottom:22px;
+      margin-bottom:20px;
     }
 
     .input-group label{
       display:block;
-      margin-bottom:10px;
-      font-size:18px;
+      margin-bottom:8px;
+      font-weight:bold;
       color:#444;
-      font-weight:600;
     }
 
     .input-group input{
       width:100%;
       padding:14px;
       border:none;
-      border-bottom:3px solid #c62828;
+      border-bottom:3px solid var(--main-color);
       background:#fafafa;
-      font-size:18px;
       outline:none;
+      font-size:17px;
       border-radius:10px 10px 0 0;
     }
 
     /* BUTTONS */
 
-    .button-group{
+    .btn-group{
       display:flex;
-      gap:15px;
+      gap:10px;
       margin-top:25px;
     }
 
     .btn{
       flex:1;
-      padding:16px;
+      padding:15px;
       border:none;
       border-radius:50px;
-      font-size:18px;
+      font-size:17px;
+      font-weight:bold;
       cursor:pointer;
       transition:0.3s;
-      font-weight:bold;
       color:white;
     }
 
     .calculate-btn{
-      background:#c62828;
-      box-shadow:0 4px 12px rgba(198,40,40,0.3);
+      background:var(--main-color);
     }
 
     .calculate-btn:hover{
-      background:#9f1d1d;
+      background:var(--dark-color);
     }
 
     .reset-btn{
-      background:#757575;
-      box-shadow:0 4px 12px rgba(0,0,0,0.2);
+      background:#666;
     }
 
     .reset-btn:hover{
-      background:#4e4e4e;
+      background:#444;
     }
 
     /* RESULT */
 
     .result{
       margin-top:25px;
-      background:#f1f1f1;
-      padding:18px;
+      background:white;
+      padding:20px;
       border-radius:15px;
       text-align:center;
-      font-size:22px;
+      font-size:24px;
       font-weight:bold;
-      color:#c62828;
+      color:var(--main-color);
+
+      border:3px solid var(--main-color);
+
+      box-shadow:
+        0 0 10px rgba(198,40,40,0.4),
+        0 0 20px rgba(198,40,40,0.3),
+        0 0 30px rgba(198,40,40,0.2);
+
       display:none;
+
+      transition:0.3s;
     }
 
     /* MOBILE */
 
     @media(max-width:500px){
 
-      .container{
-        margin:15px;
+      .btn-group{
+        flex-direction:column;
       }
 
       .header h1{
-        font-size:26px;
-      }
-
-      .button-group{
-        flex-direction:column;
+        font-size:24px;
       }
     }
 
@@ -176,30 +183,37 @@
   <!-- HEADER -->
 
   <div class="header">
-    <h1>Weight ↔ Price</h1>
+    <h1>⚖️ WEIGHT ↔ PRICE 💰</h1>
   </div>
 
-  <!-- CONTAINER -->
+  <!-- MAIN CARD -->
 
   <div class="container">
 
-    <!-- RADIO OPTIONS -->
+    <!-- MODE BUTTONS -->
 
-    <div class="radio-group">
+    <div class="mode-box">
 
-      <div class="radio-box active" id="weightToPriceBtn">
+      <button
+        class="mode-btn active"
+        id="weightBtn"
+      >
         Weight → Price
-      </div>
+      </button>
 
-      <div class="radio-box" id="priceToWeightBtn">
+      <button
+        class="mode-btn"
+        id="priceBtn"
+      >
         Price → Weight
-      </div>
+      </button>
 
     </div>
 
     <!-- PRICE PER KG -->
 
     <div class="input-group">
+
       <label>Price Per Kg</label>
 
       <input
@@ -207,23 +221,28 @@
         id="pricePerKg"
         placeholder="Enter price per kg"
       >
+
     </div>
 
     <!-- SECOND INPUT -->
 
     <div class="input-group">
-      <label id="secondLabel">Weight in Grams</label>
+
+      <label id="secondLabel">
+        Weight in Grams
+      </label>
 
       <input
         type="number"
         id="secondValue"
         placeholder="Enter weight"
       >
+
     </div>
 
     <!-- BUTTONS -->
 
-    <div class="button-group">
+    <div class="btn-group">
 
       <button
         class="btn calculate-btn"
@@ -243,7 +262,10 @@
 
     <!-- RESULT -->
 
-    <div class="result" id="resultBox"></div>
+    <div
+      class="result"
+      id="resultBox"
+    ></div>
 
   </div>
 
@@ -252,10 +274,10 @@
     let mode = "weightToPrice";
 
     const weightBtn =
-      document.getElementById("weightToPriceBtn");
+      document.getElementById("weightBtn");
 
     const priceBtn =
-      document.getElementById("priceToWeightBtn");
+      document.getElementById("priceBtn");
 
     const secondLabel =
       document.getElementById("secondLabel");
@@ -270,11 +292,14 @@
       mode = "weightToPrice";
 
       weightBtn.classList.add("active");
+
       priceBtn.classList.remove("active");
 
-      secondLabel.innerText = "Weight in Grams";
+      secondLabel.innerText =
+        "Weight in Grams";
 
-      secondValue.placeholder = "Enter weight";
+      secondValue.placeholder =
+        "Enter weight";
 
       resetFields();
     });
@@ -286,16 +311,19 @@
       mode = "priceToWeight";
 
       priceBtn.classList.add("active");
+
       weightBtn.classList.remove("active");
 
-      secondLabel.innerText = "Price Amount";
+      secondLabel.innerText =
+        "Price Amount";
 
-      secondValue.placeholder = "Enter price";
+      secondValue.placeholder =
+        "Enter price";
 
       resetFields();
     });
 
-    /* CALCULATE FUNCTION */
+    /* CALCULATE */
 
     function calculate(){
 
@@ -322,19 +350,16 @@
 
       let result = 0;
 
-      /* WEIGHT TO PRICE */
-
       if(mode === "weightToPrice"){
 
         result =
           (pricePerKg / 1000) * second;
 
         resultBox.innerHTML =
-          "Price = ₹ " + result.toFixed(2);
+          "Price = ₹ " +
+          result.toFixed(2);
 
       }
-
-      /* PRICE TO WEIGHT */
 
       else{
 
@@ -350,7 +375,7 @@
       resultBox.style.display = "block";
     }
 
-    /* RESET FUNCTION */
+    /* RESET */
 
     function resetFields(){
 
@@ -358,7 +383,8 @@
 
       document.getElementById("secondValue").value = "";
 
-      document.getElementById("resultBox").style.display = "none";
+      document.getElementById("resultBox").style.display =
+        "none";
     }
 
   </script>
