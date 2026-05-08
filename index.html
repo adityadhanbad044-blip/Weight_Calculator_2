@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Weight Price Calculator</title>
 
   <style>
@@ -10,7 +10,7 @@
     :root{
       --main-color:#c62828;
       --dark-color:#9f1d1d;
-      --light-bg:#f2f2f2;
+      --bg-color:#f2f2f2;
     }
 
     *{
@@ -21,7 +21,7 @@
     }
 
     body{
-      background:var(--light-bg);
+      background:var(--bg-color);
     }
 
     /* HEADER */
@@ -45,7 +45,7 @@
 
     .container{
       width:90%;
-      max-width:420px;
+      max-width:430px;
       margin:30px auto;
       background:white;
       padding:25px;
@@ -53,7 +53,7 @@
       box-shadow:0 5px 15px rgba(0,0,0,0.1);
     }
 
-    /* OPTION BUTTONS */
+    /* MODE BUTTONS */
 
     .mode-box{
       display:flex;
@@ -67,7 +67,7 @@
       border:none;
       border-radius:12px;
       background:#e0e0e0;
-      font-size:16px;
+      font-size:15px;
       font-weight:bold;
       cursor:pointer;
       transition:0.3s;
@@ -81,24 +81,41 @@
     /* INPUTS */
 
     .input-group{
-      margin-bottom:20px;
+      margin-bottom:22px;
     }
 
     .input-group label{
       display:block;
       margin-bottom:8px;
+      font-size:15px;
       font-weight:bold;
       color:#444;
+      line-height:22px;
     }
 
-    .input-group input{
+    .input-flex{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+
+    .input-flex input{
+      flex:2;
+    }
+
+    .input-flex select{
+      flex:1;
+    }
+
+    .input-group input,
+    .input-group select{
       width:100%;
       padding:14px;
       border:none;
       border-bottom:3px solid var(--main-color);
       background:#fafafa;
       outline:none;
-      font-size:17px;
+      font-size:16px;
       border-radius:10px 10px 0 0;
     }
 
@@ -131,11 +148,11 @@
     }
 
     .reset-btn{
-      background:#666;
+      background:#555;
     }
 
     .reset-btn:hover{
-      background:#444;
+      background:#333;
     }
 
     /* RESULT */
@@ -143,23 +160,23 @@
     .result{
       margin-top:25px;
       background:white;
-      padding:20px;
+      padding:22px;
       border-radius:15px;
       text-align:center;
-      font-size:24px;
+      font-size:22px;
       font-weight:bold;
-      color:var(--main-color);
 
       border:3px solid var(--main-color);
 
       box-shadow:
         0 0 10px rgba(198,40,40,0.4),
-        0 0 20px rgba(198,40,40,0.3),
-        0 0 30px rgba(198,40,40,0.2);
+        0 0 20px rgba(198,40,40,0.3);
 
       display:none;
 
-      transition:0.3s;
+      line-height:35px;
+
+      word-wrap:break-word;
     }
 
     /* FOOTER */
@@ -173,26 +190,24 @@
       display:inline-block;
       background:black;
       color:white;
-      padding:12px 25px;
+      padding:12px 24px;
       border-radius:12px;
-      font-size:18px;
+      font-size:17px;
       font-weight:bold;
       letter-spacing:2px;
 
       box-shadow:
         0 0 10px rgba(0,0,0,0.4),
-        0 0 20px rgba(0,0,0,0.3);
-
-      transition:0.3s;
-    }
-
-    .footer span:hover{
-      transform:scale(1.05);
+        0 0 20px rgba(0,0,0,0.2);
     }
 
     /* MOBILE */
 
     @media(max-width:500px){
+
+      .input-flex{
+        flex-direction:column;
+      }
 
       .btn-group{
         flex-direction:column;
@@ -203,8 +218,11 @@
       }
 
       .footer span{
-        font-size:15px;
-        padding:10px 18px;
+        font-size:14px;
+      }
+
+      .result{
+        font-size:18px;
       }
     }
 
@@ -219,7 +237,7 @@
     <h1>⚖️ WEIGHT ↔ PRICE 💰</h1>
   </div>
 
-  <!-- MAIN CARD -->
+  <!-- MAIN CONTAINER -->
 
   <div class="container">
 
@@ -243,33 +261,85 @@
 
     </div>
 
-    <!-- PRICE PER KG -->
+    <!-- QUANTITY -->
 
     <div class="input-group">
 
-      <label>Price Per Kg</label>
+      <label>
+        Enter Quantity For
+      </label>
 
-      <input
-        type="number"
-        id="pricePerKg"
-        placeholder="Enter price per kg"
-      >
+      <div class="input-flex">
+
+        <input
+          type="number"
+          id="priceForValue"
+          value="1"
+        >
+
+        <select id="priceForUnit">
+
+          <option value="kg">
+            Kg
+          </option>
+
+          <option value="gram">
+            Gram
+          </option>
+
+        </select>
+
+      </div>
 
     </div>
 
-    <!-- SECOND INPUT -->
+    <!-- PRICE -->
 
     <div class="input-group">
 
-      <label id="secondLabel">
-        Weight in Grams
+      <label id="priceLabel">
+        Enter Price
       </label>
 
-      <input
-        type="number"
-        id="secondValue"
-        placeholder="Enter weight"
-      >
+      <div class="input-flex">
+
+        <input
+          type="number"
+          id="priceInput"
+        >
+
+      </div>
+
+    </div>
+
+    <!-- WEIGHT / PRICE -->
+
+    <div class="input-group">
+
+      <label id="weightLabel">
+        Enter Weight In Gram Or Kg To Calculate Price
+      </label>
+
+      <div class="input-flex">
+
+        <input
+          type="number"
+          id="weightInput"
+        >
+
+        <select id="weightUnit">
+
+          <option value="gram">
+            Gram
+          </option>
+
+          <option value="kg">
+            Kg
+          </option>
+
+        </select>
+
+      </div>
 
     </div>
 
@@ -318,11 +388,8 @@
     const priceBtn =
       document.getElementById("priceBtn");
 
-    const secondLabel =
-      document.getElementById("secondLabel");
-
-    const secondValue =
-      document.getElementById("secondValue");
+    const weightLabel =
+      document.getElementById("weightLabel");
 
     /* WEIGHT TO PRICE */
 
@@ -334,11 +401,8 @@
 
       priceBtn.classList.remove("active");
 
-      secondLabel.innerText =
-        "Weight in Grams";
-
-      secondValue.placeholder =
-        "Enter weight";
+      weightLabel.innerText =
+        "Enter Weight In Gram Or Kg To Calculate Price";
 
       resetFields();
     });
@@ -353,11 +417,8 @@
 
       weightBtn.classList.remove("active");
 
-      secondLabel.innerText =
-        "Price Amount";
-
-      secondValue.placeholder =
-        "Enter price";
+      weightLabel.innerText =
+        "Enter Price To Calculate Weight";
 
       resetFields();
     });
@@ -366,49 +427,142 @@
 
     function calculate(){
 
-      const pricePerKg = parseFloat(
-        document.getElementById("pricePerKg").value
-      );
+      let quantityValue =
+        parseFloat(
+          document.getElementById("priceForValue").value
+        );
 
-      const second = parseFloat(
-        document.getElementById("secondValue").value
-      );
+      let priceInput =
+        parseFloat(
+          document.getElementById("priceInput").value
+        );
+
+      let weightInput =
+        parseFloat(
+          document.getElementById("weightInput").value
+        );
+
+      const quantityUnit =
+        document.getElementById("priceForUnit").value;
+
+      const weightUnit =
+        document.getElementById("weightUnit").value;
 
       const resultBox =
         document.getElementById("resultBox");
 
-      if(isNaN(pricePerKg) || isNaN(second)){
+      if(
+        isNaN(quantityValue) ||
+        isNaN(priceInput) ||
+        isNaN(weightInput)
+      ){
 
         resultBox.style.display = "block";
 
         resultBox.innerHTML =
-          "Please enter valid values";
+          "Please enter all values";
 
         return;
       }
 
-      let result = 0;
+      /* QUANTITY TO GRAM */
+
+      let totalGram = 0;
+
+      if(quantityUnit === "kg"){
+
+        totalGram = quantityValue * 1000;
+
+      }else{
+
+        totalGram = quantityValue;
+      }
+
+      /* PRICE PER GRAM */
+
+      let pricePerGram =
+        priceInput / totalGram;
+
+      /* WEIGHT TO PRICE */
 
       if(mode === "weightToPrice"){
 
-        result =
-          (pricePerKg / 1000) * second;
+        let finalWeight = 0;
+        let displayWeight = "";
+        let displayUnit = "";
+
+        if(weightUnit === "kg"){
+
+          finalWeight =
+            weightInput * 1000;
+
+          displayWeight =
+            weightInput;
+
+          displayUnit = "Kg";
+
+        }else{
+
+          finalWeight =
+            weightInput;
+
+          displayWeight =
+            weightInput;
+
+          displayUnit = "Gram";
+        }
+
+        let finalPrice =
+          finalWeight * pricePerGram;
 
         resultBox.innerHTML =
-          "Price = ₹ " +
-          result.toFixed(2);
+          `
+          <span style="color:black;">
+            Price For ${displayWeight} ${displayUnit} =
+          </span>
 
+          <span style="color:#c62828;">
+            ₹ ${finalPrice.toFixed(2)}
+          </span>
+          `;
       }
+
+      /* PRICE TO WEIGHT */
 
       else{
 
-        result =
-          (second / pricePerKg) * 1000;
+        let finalGram =
+          weightInput / pricePerGram;
 
-        resultBox.innerHTML =
-          "Weight = " +
-          result.toFixed(2) +
-          " g";
+        if(weightUnit === "kg"){
+
+          finalGram =
+            finalGram / 1000;
+
+          resultBox.innerHTML =
+            `
+            <span style="color:black;">
+              Weight For ₹ ${weightInput} =
+            </span>
+
+            <span style="color:#c62828;">
+              ${finalGram.toFixed(2)} Kg
+            </span>
+            `;
+
+        }else{
+
+          resultBox.innerHTML =
+            `
+            <span style="color:black;">
+              Weight For ₹ ${weightInput} =
+            </span>
+
+            <span style="color:#c62828;">
+              ${finalGram.toFixed(2)} Gram
+            </span>
+            `;
+        }
       }
 
       resultBox.style.display = "block";
@@ -418,9 +572,15 @@
 
     function resetFields(){
 
-      document.getElementById("pricePerKg").value = "";
+      document.getElementById("priceForValue").value = 1;
 
-      document.getElementById("secondValue").value = "";
+      document.getElementById("priceForUnit").value = "kg";
+
+      document.getElementById("priceInput").value = "";
+
+      document.getElementById("weightInput").value = "";
+
+      document.getElementById("weightUnit").value = "gram";
 
       document.getElementById("resultBox").style.display =
         "none";
