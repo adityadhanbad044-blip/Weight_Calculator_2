@@ -24,8 +24,6 @@
       background:var(--bg-color);
     }
 
-    /* HEADER */
-
     .header{
       background:var(--main-color);
       color:white;
@@ -41,8 +39,6 @@
       letter-spacing:1px;
     }
 
-    /* MAIN CARD */
-
     .container{
       width:90%;
       max-width:430px;
@@ -52,8 +48,6 @@
       border-radius:20px;
       box-shadow:0 5px 15px rgba(0,0,0,0.1);
     }
-
-    /* MODE BUTTONS */
 
     .mode-box{
       display:flex;
@@ -77,8 +71,6 @@
       background:var(--main-color);
       color:white;
     }
-
-    /* INPUTS */
 
     .input-group{
       margin-bottom:22px;
@@ -119,8 +111,6 @@
       border-radius:10px 10px 0 0;
     }
 
-    /* BUTTONS */
-
     .btn-group{
       display:flex;
       gap:10px;
@@ -155,8 +145,6 @@
       background:#333;
     }
 
-    /* RESULT */
-
     .result{
       margin-top:25px;
       background:white;
@@ -165,7 +153,6 @@
       text-align:center;
       font-size:22px;
       font-weight:bold;
-
       border:3px solid var(--main-color);
 
       box-shadow:
@@ -174,12 +161,8 @@
 
       display:none;
 
-      line-height:35px;
-
-      word-wrap:break-word;
+      white-space:nowrap;
     }
-
-    /* FOOTER */
 
     .footer{
       margin-top:30px;
@@ -201,8 +184,6 @@
         0 0 20px rgba(0,0,0,0.2);
     }
 
-    /* MOBILE */
-
     @media(max-width:500px){
 
       .input-flex{
@@ -223,6 +204,7 @@
 
       .result{
         font-size:18px;
+        white-space:normal;
       }
     }
 
@@ -231,17 +213,11 @@
 
 <body>
 
-  <!-- HEADER -->
-
   <div class="header">
     <h1>⚖️ WEIGHT ↔ PRICE 💰</h1>
   </div>
 
-  <!-- MAIN CONTAINER -->
-
   <div class="container">
-
-    <!-- MODE BUTTONS -->
 
     <div class="mode-box">
 
@@ -260,8 +236,6 @@
       </button>
 
     </div>
-
-    <!-- QUANTITY -->
 
     <div class="input-group">
 
@@ -293,11 +267,9 @@
 
     </div>
 
-    <!-- PRICE -->
-
     <div class="input-group">
 
-      <label id="priceLabel">
+      <label>
         Enter Price
       </label>
 
@@ -311,8 +283,6 @@
       </div>
 
     </div>
-
-    <!-- WEIGHT / PRICE -->
 
     <div class="input-group">
 
@@ -343,8 +313,6 @@
 
     </div>
 
-    <!-- BUTTONS -->
-
     <div class="btn-group">
 
       <button
@@ -363,14 +331,10 @@
 
     </div>
 
-    <!-- RESULT -->
-
     <div
       class="result"
       id="resultBox"
     ></div>
-
-    <!-- FOOTER -->
 
     <div class="footer">
       <span>DESIGN BY SHUBHAM</span>
@@ -391,8 +355,6 @@
     const weightLabel =
       document.getElementById("weightLabel");
 
-    /* WEIGHT TO PRICE */
-
     weightBtn.addEventListener("click", () => {
 
       mode = "weightToPrice";
@@ -407,8 +369,6 @@
       resetFields();
     });
 
-    /* PRICE TO WEIGHT */
-
     priceBtn.addEventListener("click", () => {
 
       mode = "priceToWeight";
@@ -422,8 +382,6 @@
 
       resetFields();
     });
-
-    /* CALCULATE */
 
     function calculate(){
 
@@ -465,8 +423,6 @@
         return;
       }
 
-      /* QUANTITY TO GRAM */
-
       let totalGram = 0;
 
       if(quantityUnit === "kg"){
@@ -477,8 +433,6 @@
 
         totalGram = quantityValue;
       }
-
-      /* PRICE PER GRAM */
 
       let pricePerGram =
         priceInput / totalGram;
@@ -542,11 +496,11 @@
           resultBox.innerHTML =
             `
             <span style="color:black;">
-              Weight For ₹ ${weightInput} =
+              Kg =
             </span>
 
             <span style="color:#c62828;">
-              ${finalGram.toFixed(2)} Kg
+              ${finalGram.toFixed(2)}
             </span>
             `;
 
@@ -555,11 +509,11 @@
           resultBox.innerHTML =
             `
             <span style="color:black;">
-              Weight For ₹ ${weightInput} =
+              Gram =
             </span>
 
             <span style="color:#c62828;">
-              ${finalGram.toFixed(2)} Gram
+              ${finalGram.toFixed(2)}
             </span>
             `;
         }
@@ -567,8 +521,6 @@
 
       resultBox.style.display = "block";
     }
-
-    /* RESET */
 
     function resetFields(){
 
